@@ -1,9 +1,7 @@
 using LinearAlgebra
-using NLopt
-using Arpack
-using BenchmarkTools
 
 
+x_init(D_2::Integer) = randn(4*(D_2^2)+(2D_2)^2+2*(D_2^2)+2)
 
 function EMixSelect(x::Array,g::Real,D_2::Int64,Gbb::Real,Gbf::Real,flag::String)
     D = 2*D_2
@@ -48,7 +46,7 @@ function EMixSelect(x::Array,g::Real,D_2::Int64,Gbb::Real,Gbf::Real,flag::String
     normanticommRbRf = norm(anticommRbRf)
     
     
-    if flag == "H_L"
+    if flag == "H"
         return  H_L
     elseif flag == "Ekinb"
         return Ekinb
@@ -64,21 +62,11 @@ function EMixSelect(x::Array,g::Real,D_2::Int64,Gbb::Real,Gbf::Real,flag::String
         return Densf
     elseif flag == "normanticommRbRf"
         return normanticommRbRf
-    elseif flag == "NfNf"
-        return  DensCorrMixFF
-    elseif flag == "NbNb"
-        return DensCorrMixBB
-    elseif flag == "NbNf"
-        return DensCorrMixBF
-    elseif flag == "qf"
-        return qf
-    elseif flag == "qb"
-        return qb
         else 
         return "Whoops, that's not an option! :)"
     end
 end
-function EMix(x::Vector,grad::Vector,D_2::Int64,Nf::Float64,Ntot::Float64,g::Real,Gbb::Real,Gbf::Int64)
+function EMix(x::Vector,grad::Vector,D_2::Int64,Nf::Float64,Ntot::Float64,g::Real,Gbb::Real,Gbf::Real)
     D = 2*D_2 
     Sigma_plus = [0 1; 0 0]
     Upper_left = [1 0; 0 0]
