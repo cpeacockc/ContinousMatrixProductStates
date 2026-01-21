@@ -29,8 +29,8 @@ dens_tol = Ntot/100 # tolerance for difference in density after optimization
 
 ### Perform optimization to find ground state
 Use your favorite optimization routine (Here I use a PRAXIS implementation in NLopt.jl)
-WARNING: this is a global optimization problem. One should optimize by looping over many different random initial points, and compare results to find the true minimum. Using simulated annealing is also encouraged
-note: Lagrange multipliers are used to set densities in EMix(), currently set to CP_b = CP_f = 1e9
+WARNING: this is a global optimization problem. One should optimize by looping over many different random initial points, and compare results to find the true minimum. Using simulated annealing is also encouraged.
+*note* Lagrange multipliers are used to set densities in EMix(), currently set to CP_b = CP_f = 1e9
 
 ```julia
 using NLopt
@@ -63,3 +63,4 @@ Ekinf = EMixSelect(minx,D_2,g,Gbb,Gbf,"Ekinf")
 Eintb = EMixSelect(minx,D_2,g,Gbb,Gbf,"Eintb")
 Eintbf = EMixSelect(minx,D_2,g,Gbb,Gbf,"Eintbf")
 ```
+
